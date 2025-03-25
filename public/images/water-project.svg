@@ -1,0 +1,100 @@
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sky gradient -->
+  <defs>
+    <linearGradient id="sky_gradient" x1="300" y1="0" x2="300" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#64B5F6"/>
+      <stop offset="1" stop-color="#90CAF9"/>
+    </linearGradient>
+    <linearGradient id="water_gradient" x1="300" y1="200" x2="300" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1976D2"/>
+      <stop offset="1" stop-color="#0D47A1"/>
+    </linearGradient>
+    <radialGradient id="sun_gradient" cx="500" cy="80" r="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFEB3B"/>
+      <stop offset="1" stop-color="#FFA000"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="200" fill="url(#sky_gradient)"/>
+  
+  <!-- Water -->
+  <rect y="200" width="600" height="200" fill="url(#water_gradient)"/>
+  
+  <!-- Sun -->
+  <circle cx="500" cy="80" r="50" fill="url(#sun_gradient)"/>
+  <circle cx="500" cy="80" r="70" fill="#FFEB3B" opacity="0.3"/>
+  
+  <!-- Clouds -->
+  <g opacity="0.8">
+    <ellipse cx="100" cy="70" rx="50" ry="20" fill="white"/>
+    <ellipse cx="130" cy="60" rx="40" ry="25" fill="white"/>
+    <ellipse cx="70" cy="60" rx="30" ry="20" fill="white"/>
+    
+    <ellipse cx="320" cy="50" rx="40" ry="15" fill="white"/>
+    <ellipse cx="350" cy="40" rx="30" ry="20" fill="white"/>
+    <ellipse cx="290" cy="40" rx="25" ry="12" fill="white"/>
+  </g>
+  
+  <!-- Mountain in background -->
+  <path d="M-50 200L100 50L250 200H-50Z" fill="#4CAF50" opacity="0.8"/>
+  <path d="M200 200L350 80L500 200H200Z" fill="#388E3C" opacity="0.8"/>
+  <path d="M400 200L550 120L650 200H400Z" fill="#2E7D32" opacity="0.8"/>
+  
+  <!-- Dam structure -->
+  <rect x="100" y="160" width="400" height="40" fill="#795548"/>
+  <rect x="120" y="140" width="360" height="20" fill="#8D6E63"/>
+  <rect x="140" y="120" width="320" height="20" fill="#A1887F"/>
+  
+  <!-- Dam details -->
+  <rect x="160" y="160" width="20" height="200" fill="#5D4037"/>
+  <rect x="240" y="160" width="20" height="200" fill="#5D4037"/>
+  <rect x="320" y="160" width="20" height="200" fill="#5D4037"/>
+  <rect x="400" y="160" width="20" height="200" fill="#5D4037"/>
+  
+  <!-- Dam spillway -->
+  <rect x="220" y="160" width="160" height="10" fill="#4E342E"/>
+  <path d="M220 170C220 170 250 220 300 240C350 220 380 170 380 170V200H220V170Z" fill="#0D47A1" opacity="0.8"/>
+  
+  <!-- Water waves -->
+  <path d="M0 230C50 220 100 240 150 230C200 220 250 240 300 230C350 220 400 240 450 230C500 220 550 240 600 230" stroke="#90CAF9" stroke-width="3" fill="none"/>
+  <path d="M0 250C50 240 100 260 150 250C200 240 250 260 300 250C350 240 400 260 450 250C500 240 550 260 600 250" stroke="#90CAF9" stroke-width="3" fill="none"/>
+  <path d="M0 270C50 260 100 280 150 270C200 260 250 280 300 270C350 260 400 280 450 270C500 260 550 280 600 270" stroke="#90CAF9" stroke-width="3" fill="none"/>
+  <path d="M0 290C50 280 100 300 150 290C200 280 250 300 300 290C350 280 400 300 450 290C500 280 550 300 600 290" stroke="#90CAF9" stroke-width="3" fill="none"/>
+  <path d="M0 310C50 300 100 320 150 310C200 300 250 320 300 310C350 300 400 320 450 310C500 300 550 320 600 310" stroke="#90CAF9" stroke-width="3" fill="none"/>
+  
+  <!-- Trees by the dam -->
+  <g transform="translate(50, 160)">
+    <rect x="-5" y="0" width="10" height="20" fill="#5D4037"/>
+    <circle cx="0" cy="-10" r="15" fill="#43A047"/>
+  </g>
+  
+  <g transform="translate(80, 160)">
+    <rect x="-4" y="0" width="8" height="15" fill="#5D4037"/>
+    <circle cx="0" cy="-10" r="12" fill="#43A047"/>
+  </g>
+  
+  <g transform="translate(450, 160)">
+    <rect x="-5" y="0" width="10" height="20" fill="#5D4037"/>
+    <circle cx="0" cy="-10" r="15" fill="#43A047"/>
+  </g>
+  
+  <g transform="translate(480, 160)">
+    <rect x="-4" y="0" width="8" height="15" fill="#5D4037"/>
+    <circle cx="0" cy="-10" r="12" fill="#43A047"/>
+  </g>
+  
+  <!-- Fish in the water -->
+  <path d="M150 350C150 350 160 340 170 350C180 360 190 350 190 350L200 360V340L190 350C190 350 180 340 170 350C160 360 150 350 150 350Z" fill="#E0E0E0"/>
+  <circle cx="155" cy="347" r="2" fill="#424242"/>
+  
+  <path d="M350 320C350 320 360 310 370 320C380 330 390 320 390 320L400 330V310L390 320C390 320 380 310 370 320C360 330 350 320 350 320Z" fill="#E0E0E0"/>
+  <circle cx="355" cy="317" r="2" fill="#424242"/>
+  
+  <path d="M250 380C250 380 260 370 270 380C280 390 290 380 290 380L300 390V370L290 380C290 380 280 370 270 380C260 390 250 380 250 380Z" fill="#E0E0E0"/>
+  <circle cx="255" cy="377" r="2" fill="#424242"/>
+  
+  <!-- Project Label -->
+  <rect x="150" y="330" width="300" height="50" rx="10" fill="#0288D1" opacity="0.9"/>
+  <text x="300" y="360" font-family="Arial" font-size="20" fill="white" text-anchor="middle">Water Conservation Project</text>
+</svg> 

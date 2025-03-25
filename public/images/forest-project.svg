@@ -1,0 +1,64 @@
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="600" height="400" fill="#E8F5E9"/>
+  
+  <!-- Forest floor -->
+  <rect y="300" width="600" height="100" fill="#795548"/>
+  
+  <!-- Trees -->
+  <g>
+    <!-- Tree 1 -->
+    <rect x="50" y="200" width="20" height="100" fill="#5D4037"/>
+    <circle cx="60" cy="150" r="50" fill="#2E7D32"/>
+    <circle cx="60" cy="120" r="40" fill="#388E3C"/>
+    <circle cx="60" cy="90" r="30" fill="#43A047"/>
+    
+    <!-- Tree 2 -->
+    <rect x="150" y="220" width="15" height="80" fill="#5D4037"/>
+    <circle cx="157.5" cy="180" r="40" fill="#2E7D32"/>
+    <circle cx="157.5" cy="150" r="30" fill="#388E3C"/>
+    <circle cx="157.5" cy="130" r="20" fill="#43A047"/>
+    
+    <!-- Tree 3 -->
+    <rect x="250" y="180" width="25" height="120" fill="#5D4037"/>
+    <circle cx="262.5" cy="130" r="60" fill="#2E7D32"/>
+    <circle cx="262.5" cy="100" r="50" fill="#388E3C"/>
+    <circle cx="262.5" cy="70" r="40" fill="#43A047"/>
+    
+    <!-- Tree 4 -->
+    <rect x="350" y="210" width="18" height="90" fill="#5D4037"/>
+    <circle cx="359" cy="170" r="45" fill="#2E7D32"/>
+    <circle cx="359" cy="140" r="35" fill="#388E3C"/>
+    <circle cx="359" cy="110" r="25" fill="#43A047"/>
+    
+    <!-- Tree 5 -->
+    <rect x="450" y="190" width="22" height="110" fill="#5D4037"/>
+    <circle cx="461" cy="140" r="55" fill="#2E7D32"/>
+    <circle cx="461" cy="110" r="45" fill="#388E3C"/>
+    <circle cx="461" cy="80" r="35" fill="#43A047"/>
+    
+    <!-- Tree 6 -->
+    <rect x="530" y="230" width="16" height="70" fill="#5D4037"/>
+    <circle cx="538" cy="190" r="35" fill="#2E7D32"/>
+    <circle cx="538" cy="165" r="25" fill="#388E3C"/>
+    <circle cx="538" cy="145" r="15" fill="#43A047"/>
+  </g>
+  
+  <!-- Sun -->
+  <circle cx="80" cy="80" r="40" fill="#FFC107" opacity="0.8"/>
+  <circle cx="80" cy="80" r="60" fill="#FFC107" opacity="0.3"/>
+  
+  <!-- Birds -->
+  <path d="M400 90C405 85 410 90 415 85C410 90 415 95 410 95C405 95 400 90 400 90Z" fill="#424242"/>
+  <path d="M420 70C425 65 430 70 435 65C430 70 435 75 430 75C425 75 420 70 420 70Z" fill="#424242"/>
+  <path d="M450 100C455 95 460 100 465 95C460 100 465 105 460 105C455 105 450 100 450 100Z" fill="#424242"/>
+  
+  <!-- Clouds -->
+  <ellipse cx="150" cy="60" rx="50" ry="20" fill="white" opacity="0.8"/>
+  <ellipse cx="350" cy="40" rx="70" ry="25" fill="white" opacity="0.8"/>
+  <ellipse cx="500" cy="70" rx="60" ry="20" fill="white" opacity="0.8"/>
+  
+  <!-- Conservation Label -->
+  <rect x="150" y="330" width="300" height="50" rx="10" fill="#1B5E20" opacity="0.9"/>
+  <text x="300" y="360" font-family="Arial" font-size="20" fill="white" text-anchor="middle">Forest Conservation Project</text>
+</svg> 

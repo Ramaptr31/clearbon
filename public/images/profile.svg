@@ -1,0 +1,45 @@
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <circle cx="200" cy="200" r="200" fill="#E0E0E0"/>
+  
+  <!-- Shadow gradient -->
+  <defs>
+    <radialGradient id="face_shadow" cx="200" cy="200" r="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0.8" stop-color="#E0E0E0" stop-opacity="0"/>
+      <stop offset="1" stop-color="#BDBDBD" stop-opacity="0.5"/>
+    </radialGradient>
+  </defs>
+  <circle cx="200" cy="200" r="200" fill="url(#face_shadow)"/>
+  
+  <!-- Head -->
+  <circle cx="200" cy="180" r="100" fill="#FAFAFA"/>
+  
+  <!-- Eyes -->
+  <ellipse cx="160" cy="160" rx="15" ry="10" fill="#424242"/>
+  <ellipse cx="240" cy="160" rx="15" ry="10" fill="#424242"/>
+  
+  <!-- Eyebrows -->
+  <path d="M145 140C145 140 155 135 175 140" stroke="#616161" stroke-width="5" stroke-linecap="round"/>
+  <path d="M225 140C225 140 235 135 255 140" stroke="#616161" stroke-width="5" stroke-linecap="round"/>
+  
+  <!-- Nose -->
+  <path d="M200 170L190 190H210Z" fill="#E0E0E0"/>
+  
+  <!-- Mouth -->
+  <path d="M170 210C170 210 185 230 230 210" stroke="#616161" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Hair -->
+  <path d="M100 160C100 160 100 100 200 90C300 100 300 160 300 160" fill="#9E9E9E"/>
+  <path d="M100 160C100 160 100 100 200 90C300 100 300 160 300 160" stroke="#757575" stroke-width="2"/>
+  
+  <!-- Shoulders -->
+  <path d="M200 280C150 280 120 290 100 350H300C280 290 250 280 200 280Z" fill="#42A5F5"/>
+  
+  <!-- Collar -->
+  <path d="M160 280L180 320H220L240 280" fill="#1E88E5"/>
+  
+  <!-- Shirt details -->
+  <line x1="200" y1="320" x2="200" y2="380" stroke="#1E88E5" stroke-width="2"/>
+  <line x1="180" y1="320" x2="170" y2="380" stroke="#1E88E5" stroke-width="1" opacity="0.5"/>
+  <line x1="220" y1="320" x2="230" y2="380" stroke="#1E88E5" stroke-width="1" opacity="0.5"/>
+</svg> 

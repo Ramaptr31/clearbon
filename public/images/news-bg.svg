@@ -1,0 +1,88 @@
+<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bg_gradient" x1="0" y1="0" x2="800" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E8F5E9"/>
+      <stop offset="1" stop-color="#C8E6C9"/>
+    </linearGradient>
+    <linearGradient id="text_bg" x1="400" y1="150" x2="400" y2="350" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="white" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="white" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg_gradient)"/>
+  
+  <!-- Abstract world map -->
+  <g opacity="0.1" fill="#1B5E20">
+    <!-- North America -->
+    <path d="M100 100C100 100 150 80 200 100C250 120 250 150 300 150C320 130 350 150 350 180C350 210 300 230 280 200C260 170 200 200 180 170C160 140 120 150 100 100Z"/>
+    
+    <!-- South America -->
+    <path d="M250 220C250 220 280 250 300 280C320 310 300 350 270 350C240 350 230 320 230 300C230 280 220 250 250 220Z"/>
+    
+    <!-- Europe and Africa -->
+    <path d="M400 100C400 100 450 80 470 100C490 120 500 150 480 180C460 210 440 220 450 250C460 280 450 320 420 340C390 360 350 340 370 300C390 260 410 250 390 230C370 210 380 180 380 150C380 120 400 100 400 100Z"/>
+    
+    <!-- Asia and Australia -->
+    <path d="M550 120C550 120 600 100 650 120C700 140 720 190 700 220C680 250 650 230 620 250C590 270 600 300 580 330C560 360 520 350 510 320C500 290 520 260 550 250C580 240 610 200 570 180C530 160 550 120 550 120Z"/>
+    <ellipse cx="650" cy="320" rx="40" ry="30" fill="#1B5E20" opacity="0.1"/>
+  </g>
+  
+  <!-- News elements -->
+  <!-- Headlines box -->
+  <rect x="100" y="150" width="600" height="200" rx="10" fill="url(#text_bg)"/>
+  
+  <!-- Decorative elements -->
+  <rect x="130" y="180" width="540" height="2" fill="#4CAF50"/>
+  <rect x="130" y="320" width="540" height="2" fill="#4CAF50"/>
+  
+  <!-- Headline text placeholder -->
+  <rect x="130" y="200" width="400" height="20" rx="5" fill="#81C784"/>
+  <rect x="130" y="230" width="350" height="20" rx="5" fill="#81C784"/>
+  
+  <!-- Subhead text placeholder -->
+  <rect x="130" y="270" width="200" height="10" rx="5" fill="#A5D6A7"/>
+  <rect x="130" y="290" width="500" height="10" rx="5" fill="#A5D6A7"/>
+  
+  <!-- Date -->
+  <rect x="550" y="270" width="120" height="10" rx="5" fill="#A5D6A7"/>
+  
+  <!-- Icons -->
+  <g transform="translate(720, 180)">
+    <circle cx="0" cy="0" r="15" fill="#4CAF50" opacity="0.7"/>
+    <path d="M-5,0 L-1,4 L5,-2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <g transform="translate(720, 220)">
+    <circle cx="0" cy="0" r="15" fill="#4CAF50" opacity="0.7"/>
+    <rect x="-6" y="-6" width="12" height="12" stroke="white" stroke-width="2" fill="none"/>
+  </g>
+  
+  <g transform="translate(720, 260)">
+    <circle cx="0" cy="0" r="15" fill="#4CAF50" opacity="0.7"/>
+    <path d="M-5,-5 L5,5 M-5,5 L5,-5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="400" y="80" font-family="Arial" font-size="32" font-weight="bold" fill="#1B5E20" text-anchor="middle">Environmental News</text>
+  
+  <!-- Subtitle -->
+  <text x="400" y="110" font-family="Arial" font-size="18" fill="#2E7D32" text-anchor="middle">Stay informed about climate initiatives worldwide</text>
+  
+  <!-- Abstract earth symbols -->
+  <g transform="translate(60, 60)">
+    <circle cx="0" cy="0" r="30" fill="#4CAF50" opacity="0.3"/>
+    <circle cx="0" cy="0" r="20" fill="#4CAF50" opacity="0.5"/>
+    <path d="M0,-20 Q10,-10 0,0 Q-10,10 0,20" stroke="#1B5E20" stroke-width="2" fill="none"/>
+    <path d="M-20,0 Q-10,-10 0,0 Q10,10 20,0" stroke="#1B5E20" stroke-width="2" fill="none"/>
+  </g>
+  
+  <g transform="translate(740, 60)">
+    <circle cx="0" cy="0" r="30" fill="#4CAF50" opacity="0.3"/>
+    <circle cx="0" cy="0" r="20" fill="#4CAF50" opacity="0.5"/>
+    <path d="M0,-20 Q10,-10 0,0 Q-10,10 0,20" stroke="#1B5E20" stroke-width="2" fill="none"/>
+    <path d="M-20,0 Q-10,-10 0,0 Q10,10 20,0" stroke="#1B5E20" stroke-width="2" fill="none"/>
+  </g>
+</svg> 

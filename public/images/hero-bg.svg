@@ -1,0 +1,78 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <rect width="1920" height="1080" fill="url(#bg-gradient)"/>
+  
+  <!-- Far mountains -->
+  <path d="M0 540L240 340L480 480L720 380L960 480L1200 380L1440 420L1680 320L1920 400V1080H0V540Z" fill="#2A4D3A" opacity="0.7"/>
+  
+  <!-- Mid mountains -->
+  <path d="M0 600L192 500L384 550L576 480L768 580L960 500L1152 560L1344 480L1536 540L1728 480L1920 550V1080H0V600Z" fill="#1C3228" opacity="0.8"/>
+  
+  <!-- Foreground hills -->
+  <path d="M0 680L213 620L427 650L640 610L853 670L1067 630L1280 660L1493 620L1707 650L1920 630V1080H0V680Z" fill="#0D1F1A" opacity="0.9"/>
+  
+  <!-- Trees -->
+  <g opacity="0.8">
+    <!-- Row 1 -->
+    <circle cx="200" cy="720" r="40" fill="#2E7D32"/>
+    <circle cx="400" cy="740" r="35" fill="#388E3C"/>
+    <circle cx="600" cy="730" r="45" fill="#2E7D32"/>
+    <circle cx="800" cy="750" r="30" fill="#388E3C"/>
+    <circle cx="1000" cy="725" r="42" fill="#2E7D32"/>
+    <circle cx="1200" cy="745" r="38" fill="#388E3C"/>
+    <circle cx="1400" cy="735" r="40" fill="#2E7D32"/>
+    <circle cx="1600" cy="755" r="36" fill="#388E3C"/>
+    <circle cx="1800" cy="740" r="44" fill="#2E7D32"/>
+    
+    <!-- Row 2 -->
+    <circle cx="100" cy="780" r="30" fill="#388E3C"/>
+    <circle cx="300" cy="790" r="35" fill="#2E7D32"/>
+    <circle cx="500" cy="780" r="28" fill="#388E3C"/>
+    <circle cx="700" cy="795" r="32" fill="#2E7D32"/>
+    <circle cx="900" cy="785" r="30" fill="#388E3C"/>
+    <circle cx="1100" cy="800" r="35" fill="#2E7D32"/>
+    <circle cx="1300" cy="790" r="28" fill="#388E3C"/>
+    <circle cx="1500" cy="785" r="32" fill="#2E7D32"/>
+    <circle cx="1700" cy="795" r="30" fill="#388E3C"/>
+    <circle cx="1900" cy="785" r="35" fill="#2E7D32"/>
+    
+    <!-- Row 3 -->
+    <circle cx="150" cy="850" r="40" fill="#2E7D32"/>
+    <circle cx="350" cy="860" r="36" fill="#388E3C"/>
+    <circle cx="550" cy="855" r="42" fill="#2E7D32"/>
+    <circle cx="750" cy="865" r="38" fill="#388E3C"/>
+    <circle cx="950" cy="860" r="40" fill="#2E7D32"/>
+    <circle cx="1150" cy="870" r="36" fill="#388E3C"/>
+    <circle cx="1350" cy="865" r="42" fill="#2E7D32"/>
+    <circle cx="1550" cy="875" r="38" fill="#388E3C"/>
+    <circle cx="1750" cy="860" r="40" fill="#2E7D32"/>
+  </g>
+  
+  <!-- Foreground -->
+  <rect y="900" width="1920" height="180" fill="#0A1711"/>
+  
+  <!-- Sun -->
+  <circle cx="1500" cy="300" r="80" fill="#FCD34D" opacity="0.8"/>
+  <circle cx="1500" cy="300" r="120" fill="#FCD34D" opacity="0.2"/>
+  <circle cx="1500" cy="300" r="160" fill="#FCD34D" opacity="0.1"/>
+  
+  <!-- Light rays -->
+  <g opacity="0.2">
+    <rect x="1460" y="0" width="80" height="1080" fill="url(#light-gradient)"/>
+    <rect x="1400" y="0" width="40" height="1080" fill="url(#light-gradient)" opacity="0.5"/>
+    <rect x="1560" y="0" width="40" height="1080" fill="url(#light-gradient)" opacity="0.5"/>
+  </g>
+  
+  <!-- Definitions -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="960" y1="0" x2="960" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4B93C8"/>
+      <stop offset="0.5" stop-color="#2E7D32"/>
+      <stop offset="1" stop-color="#1C3228"/>
+    </linearGradient>
+    <linearGradient id="light-gradient" x1="960" y1="0" x2="960" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FCD34D"/>
+      <stop offset="1" stop-color="#FCD34D" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg> 
