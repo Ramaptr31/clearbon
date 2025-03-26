@@ -45,7 +45,7 @@ export default function Login() {
   };
 
   return (
-    <div className="pt-16 min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+    <div className="pt-16 min-h-screen flex items-center justify-center bg-pale-lime bg-opacity-20 dark:bg-gray-900">
       <div className="w-full max-w-md p-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -54,7 +54,7 @@ export default function Login() {
           className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-8"
         >
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-3xl font-bold text-dark-forest dark:text-white mb-2">
               Welcome Back
             </h1>
             <p className="text-gray-600 dark:text-gray-300">
@@ -67,14 +67,14 @@ export default function Login() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
-              className="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg p-6 text-center mb-6"
+              className="bg-pale-lime bg-opacity-20 dark:bg-sage/30 border border-sage dark:border-dark-forest rounded-lg p-6 text-center mb-6"
             >
-              <div className="w-16 h-16 bg-primary rounded-full mx-auto flex items-center justify-center mb-4">
+              <div className="w-16 h-16 bg-dark-forest rounded-full mx-auto flex items-center justify-center mb-4">
                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+              <h3 className="text-xl font-semibold mb-2 text-dark-forest dark:text-white">
                 Login Successful!
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -82,7 +82,7 @@ export default function Login() {
               </p>
               <Link 
                 href="/"
-                className="px-6 py-2 bg-primary hover:bg-secondary text-white font-medium rounded-md transition-colors duration-300 inline-block"
+                className="px-6 py-2 bg-dark-forest hover:bg-sage text-white font-medium rounded-md transition-colors duration-300 inline-block"
               >
                 Go to Dashboard
               </Link>
@@ -109,7 +109,7 @@ export default function Login() {
                     name="email"
                     value={formState.email}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors duration-200"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sage focus:border-sage outline-none transition-colors duration-200"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -122,7 +122,7 @@ export default function Login() {
                   </label>
                   <Link 
                     href="#" 
-                    className="text-sm text-primary hover:text-secondary transition-colors duration-300"
+                    className="text-sm text-dark-forest hover:text-sage transition-colors duration-300"
                   >
                     Forgot Password?
                   </Link>
@@ -137,7 +137,7 @@ export default function Login() {
                     name="password"
                     value={formState.password}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors duration-200"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sage focus:border-sage outline-none transition-colors duration-200"
                     placeholder="••••••••"
                   />
                 </div>
@@ -150,7 +150,7 @@ export default function Login() {
                   name="rememberMe"
                   checked={formState.rememberMe}
                   onChange={handleChange}
-                  className="h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary"
+                  className="h-4 w-4 text-dark-forest border-gray-300 rounded focus:ring-sage"
                 />
                 <label htmlFor="rememberMe" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                   Remember me
@@ -161,7 +161,7 @@ export default function Login() {
                 type="submit"
                 disabled={isLoading}
                 className={`w-full px-6 py-3 flex justify-center items-center rounded-md text-white font-medium transition-colors duration-300 ${
-                  isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary hover:bg-secondary'
+                  isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-dark-forest hover:bg-sage'
                 }`}
               >
                 {isLoading ? (
@@ -178,7 +178,7 @@ export default function Login() {
                   Don't have an account?{' '}
                   <Link 
                     href="#" 
-                    className="text-primary hover:text-secondary transition-colors duration-300 font-medium"
+                    className="text-dark-forest hover:text-sage transition-colors duration-300 font-medium"
                   >
                     Create an account
                   </Link>
@@ -190,11 +190,11 @@ export default function Login() {
           <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
             <p className="text-xs text-center text-gray-500 dark:text-gray-400">
               By logging in, you agree to our{' '}
-              <Link href="/terms-conditions" className="text-primary hover:text-secondary">
+              <Link href="/terms-conditions" className="text-dark-forest hover:text-sage">
                 Terms & Conditions
               </Link>{' '}
               and{' '}
-              <Link href="/privacy-policy" className="text-primary hover:text-secondary">
+              <Link href="/privacy-policy" className="text-dark-forest hover:text-sage">
                 Privacy Policy
               </Link>
             </p>

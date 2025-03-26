@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
-import { FaCar, FaPlane, FaHome, FaShoppingBag, FaUtensils, FaTrash } from 'react-icons/fa';
+import { FaCar, FaPlane, FaHome, FaShoppingBag, FaUtensils, FaTrash, FaLeaf, FaArrowRight } from 'react-icons/fa';
 
-// Define event types for form inputs
+// Interface untuk event input
 interface InputChangeEvent {
   target: {
     name: string;
@@ -154,440 +154,592 @@ export default function Calculator() {
     // Scroll to results
     const resultsSection = document.getElementById('results-section');
     if (resultsSection) {
-    window.scrollTo({
+      window.scrollTo({
         top: resultsSection.offsetTop,
-      behavior: 'smooth'
-    });
+        behavior: 'smooth'
+      });
     }
   };
 
   return (
-    <main className="min-h-screen bg-white pb-16">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-green-600 to-green-800 py-16 text-white">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Carbon Footprint Calculator
-          </h1>
-          <p className="text-xl max-w-3xl">
-            Calculate your personal carbon footprint and discover ways to reduce your environmental impact.
-          </p>
-        </div>
-      </section>
+    <div className="min-h-screen bg-pale-lime bg-opacity-10">
+      <div className="container mx-auto px-4 pt-28 pb-16">
+        <h1 className="text-3xl font-bold text-dark-forest text-center mb-6">Carbon Footprint Calculator</h1>
+        <p className="text-gray-700 text-center mb-12 max-w-2xl mx-auto">
+          Calculate your personal carbon footprint and discover ways to reduce your impact on the environment.
+        </p>
 
-      {/* Calculator Section */}
-      <section 
-        ref={calculatorRef}
-        className="container mx-auto px-4 py-12"
-      >
-        <motion.div
-          initial="hidden"
-          animate={calculatorInView ? "visible" : "hidden"}
-          variants={fadeIn}
-          className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6 md:p-8"
-        >
-          <h2 className="text-3xl font-bold text-green-700 mb-8">Enter Your Information</h2>
-          
+        <div className="grid gap-8 mb-16">
           {/* Transportation Section */}
-          <div className="mb-10">
-            <div className="flex items-center mb-4">
-              <FaCar className="text-green-600 text-2xl mr-3" />
-              <h3 className="text-2xl font-semibold text-gray-800">Transportation</h3>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6">
+          <motion.div 
+            className="bg-white rounded-lg p-6 border border-sage shadow-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-xl font-semibold text-dark-forest mb-4 flex items-center">
+              <div className="bg-sage p-2 rounded-full mr-3 text-white">
+                <FaCar />
+              </div>
+              Transportation
+            </h2>
+            <div className="grid gap-6 md:grid-cols-2">
               <div>
-                <label className="block text-gray-700 mb-2">Car Miles Driven Weekly</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Weekly car mileage
+                </label>
                 <input
                   type="number"
                   name="carMileage"
-                  value={formData.carMileage || ''}
+                  value={formData.carMileage}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="0"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="Miles per week"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 mb-2">Car Fuel Efficiency (MPG)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Car fuel efficiency
+                </label>
                 <input
                   type="number"
                   name="carEfficiency"
-                  value={formData.carEfficiency || ''}
+                  value={formData.carEfficiency}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="25"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="Miles per gallon"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 mb-2">Short Flights Per Year (&lt; 3 hours)</label>
-                <input
-                  type="number"
-                  name="flightShortHaul"
-                  value={formData.flightShortHaul || ''}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="0"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2">Medium Flights Per Year (3-6 hours)</label>
-                <input
-                  type="number"
-                  name="flightMediumHaul"
-                  value={formData.flightMediumHaul || ''}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="0"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2">Long Flights Per Year (&gt; 6 hours)</label>
-                <input
-                  type="number"
-                  name="flightLongHaul"
-                  value={formData.flightLongHaul || ''}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="0"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2">Public Transport Miles Per Week</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Public transportation miles per week
+                </label>
                 <input
                   type="number"
                   name="publicTransport"
-                  value={formData.publicTransport || ''}
+                  value={formData.publicTransport}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="0"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="Miles per week"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Short flights per year (&lt; 3 hours)
+                </label>
+                <input
+                  type="number"
+                  name="flightShortHaul"
+                  value={formData.flightShortHaul}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="Flights per year"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Medium flights per year (3-6 hours)
+                </label>
+                <input
+                  type="number"
+                  name="flightMediumHaul"
+                  value={formData.flightMediumHaul}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="Flights per year"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Long flights per year (&gt; 6 hours)
+                </label>
+                <input
+                  type="number"
+                  name="flightLongHaul"
+                  value={formData.flightLongHaul}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="Flights per year"
                 />
               </div>
             </div>
-          </div>
-          
+          </motion.div>
+
           {/* Home Energy Section */}
-          <div className="mb-10">
-            <div className="flex items-center mb-4">
-              <FaHome className="text-green-600 text-2xl mr-3" />
-              <h3 className="text-2xl font-semibold text-gray-800">Home Energy</h3>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6">
+          <motion.div 
+            ref={calculatorRef}
+            className="bg-white rounded-lg p-6 border border-sage shadow-sm"
+            initial="hidden"
+            animate={calculatorInView ? "visible" : "hidden"}
+            variants={fadeIn}
+          >
+            <h2 className="text-xl font-semibold text-dark-forest mb-4 flex items-center">
+              <div className="bg-sage p-2 rounded-full mr-3 text-white">
+                <FaHome />
+              </div>
+              Home Energy
+            </h2>
+            <div className="grid gap-6 md:grid-cols-2">
               <div>
-                <label className="block text-gray-700 mb-2">Electricity Usage (kWh per month)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Monthly electricity usage
+                </label>
                 <input
                   type="number"
                   name="electricityUsage"
-                  value={formData.electricityUsage || ''}
+                  value={formData.electricityUsage}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="0"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="kWh per month"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 mb-2">Natural Gas Usage (therms per month)</label>
-                <input
-                  type="number"
-                  name="naturalGasUsage"
-                  value={formData.naturalGasUsage || ''}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="0"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-2">Renewable Energy Percentage</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Renewable energy percentage
+                </label>
                 <input
                   type="number"
                   name="renewablePercentage"
-                  value={formData.renewablePercentage || ''}
+                  value={formData.renewablePercentage}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="0"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="% of renewable energy"
                   min="0"
                   max="100"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 mb-2">Household Size (people)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Monthly natural gas usage
+                </label>
+                <input
+                  type="number"
+                  name="naturalGasUsage"
+                  value={formData.naturalGasUsage}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="Therms per month"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Household size
+                </label>
                 <input
                   type="number"
                   name="householdSize"
-                  value={formData.householdSize || ''}
+                  value={formData.householdSize}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="1"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="Number of people"
                   min="1"
                 />
               </div>
             </div>
-          </div>
-          
+          </motion.div>
+
           {/* Food & Consumption Section */}
-          <div className="mb-10">
-            <div className="flex items-center mb-4">
-              <FaUtensils className="text-green-600 text-2xl mr-3" />
-              <h3 className="text-2xl font-semibold text-gray-800">Food & Consumption</h3>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6">
+          <motion.div 
+            className="bg-white rounded-lg p-6 border border-sage shadow-sm"
+            initial="hidden"
+            animate={calculatorInView ? "visible" : "hidden"}
+            variants={fadeIn}
+          >
+            <h2 className="text-xl font-semibold text-dark-forest mb-4 flex items-center">
+              <div className="bg-sage p-2 rounded-full mr-3 text-white">
+                <FaUtensils />
+              </div> 
+              Food & Consumption
+            </h2>
+            <div className="grid gap-6 md:grid-cols-2">
               <div>
-                <label className="block text-gray-700 mb-2">Diet Type</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Diet type
+                </label>
                 <select
                   name="dietType"
                   value={formData.dietType}
                   onChange={handleSelectChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
                 >
                   <option value="omnivore">Omnivore (Regular meat consumption)</option>
-                  <option value="pescatarian">Pescatarian (Fish but no meat)</option>
+                  <option value="pescatarian">Pescatarian (Fish, no meat)</option>
                   <option value="vegetarian">Vegetarian (No meat or fish)</option>
                   <option value="vegan">Vegan (No animal products)</option>
                 </select>
               </div>
               <div>
-                <label className="block text-gray-700 mb-2">Locally Sourced Food Percentage</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Local food percentage
+                </label>
                 <input
                   type="number"
                   name="localFoodPercentage"
-                  value={formData.localFoodPercentage || ''}
+                  value={formData.localFoodPercentage}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="0"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="% of locally sourced food"
                   min="0"
                   max="100"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 mb-2">New Clothing Items Per Year</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  New clothing items per year
+                </label>
                 <input
                   type="number"
                   name="newClothingItems"
-                  value={formData.newClothingItems || ''}
+                  value={formData.newClothingItems}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="0"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="Items per year"
+                  min="0"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 mb-2">New Electronics Items Per Year</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  New electronic items per year
+                </label>
                 <input
                   type="number"
                   name="newElectronicsItems"
-                  value={formData.newElectronicsItems || ''}
+                  value={formData.newElectronicsItems}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="0"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="Items per year"
+                  min="0"
                 />
               </div>
             </div>
-          </div>
-          
+          </motion.div>
+
           {/* Waste Section */}
-          <div className="mb-10">
-            <div className="flex items-center mb-4">
-              <FaTrash className="text-green-600 text-2xl mr-3" />
-              <h3 className="text-2xl font-semibold text-gray-800">Waste</h3>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6">
+          <motion.div 
+            className="bg-white rounded-lg p-6 border border-sage shadow-sm"
+            initial="hidden"
+            animate={calculatorInView ? "visible" : "hidden"}
+            variants={fadeIn}
+          >
+            <h2 className="text-xl font-semibold text-dark-forest mb-4 flex items-center">
+              <div className="bg-sage p-2 rounded-full mr-3 text-white">
+                <FaTrash />
+              </div> 
+              Waste
+            </h2>
+            <div className="grid gap-6 md:grid-cols-2">
               <div>
-                <label className="block text-gray-700 mb-2">Recycling Percentage</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Recycling percentage
+                </label>
                 <input
                   type="number"
                   name="recyclingPercentage"
-                  value={formData.recyclingPercentage || ''}
+                  value={formData.recyclingPercentage}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="0"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="% of waste recycled"
                   min="0"
                   max="100"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 mb-2">Composting Percentage</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Composting percentage
+                </label>
                 <input
                   type="number"
                   name="compostingPercentage"
-                  value={formData.compostingPercentage || ''}
+                  value={formData.compostingPercentage}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="0"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-sage"
+                  placeholder="% of food waste composted"
                   min="0"
                   max="100"
                 />
               </div>
             </div>
-          </div>
-          
-          {/* Calculate Button */}
+          </motion.div>
+
           <div className="text-center mt-8">
             <button
               onClick={calculateFootprint}
-              className="px-8 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 text-lg"
+              className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-lg text-white bg-dark-forest hover:bg-sage focus:outline-none focus:ring-4 focus:ring-pale-lime transition-all duration-300 shadow-lg hover:shadow-xl"
             >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
               Calculate My Footprint
             </button>
           </div>
-        </motion.div>
-      </section>
+        </div>
 
-      {/* Results Section */}
-      <section 
-        id="results-section"
-        ref={resultsRef}
-        className="container mx-auto px-4 py-12"
-      >
+        {/* Results Section */}
         {results.showResults && (
-          <motion.div
+          <motion.div 
+            id="results-section"
+            ref={resultsRef}
+            className="bg-white rounded-lg p-8 border border-sage shadow-sm mb-16"
             initial="hidden"
             animate={resultsInView ? "visible" : "hidden"}
             variants={slideUp}
-            className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6 md:p-8"
           >
-            <h2 className="text-3xl font-bold text-green-700 mb-8">Your Carbon Footprint Results</h2>
+            <h2 className="text-2xl font-bold text-dark-forest mb-6 text-center">Your Carbon Footprint Results</h2>
             
-            <div className="grid md:grid-cols-2 gap-8 mb-8">
-              <div className="bg-gray-50 p-5 rounded-lg">
-                <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center">
-                  <FaCar className="text-green-600 mr-2" />
-                  Transportation
-                </h3>
-                <p className="text-4xl font-bold text-green-600">{results.transportationEmissions.toFixed(2)} <span className="text-lg">tons CO<sub>2</sub>e/year</span></p>
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold text-dark-forest mb-4">Total Annual Emissions</h3>
+              <div className="relative h-16 bg-gray-100 rounded-full overflow-hidden shadow-inner">
+                <div 
+                  className="absolute h-full bg-gradient-to-r from-sage to-dark-forest rounded-full transition-all duration-1000 ease-out"
+                  style={{ width: `${Math.min(100, (results.totalEmissions / 20) * 100)}%` }}
+                ></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="font-bold text-gray-800 text-lg">{results.totalEmissions.toFixed(2)} metric tons CO₂e per year</span>
+                </div>
               </div>
-              
-              <div className="bg-gray-50 p-5 rounded-lg">
-                <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center">
-                  <FaHome className="text-green-600 mr-2" />
-                  Home Energy
-                </h3>
-                <p className="text-4xl font-bold text-green-600">{results.homeEnergyEmissions.toFixed(2)} <span className="text-lg">tons CO<sub>2</sub>e/year</span></p>
+              <div className="flex justify-between text-xs text-gray-600 px-1 mt-1">
+                <span>0</span>
+                <span>5</span>
+                <span>10</span>
+                <span>15</span>
+                <span>20+</span>
               </div>
-              
-              <div className="bg-gray-50 p-5 rounded-lg">
-                <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center">
-                  <FaUtensils className="text-green-600 mr-2" />
-                  Food
-                </h3>
-                <p className="text-4xl font-bold text-green-600">{results.foodEmissions.toFixed(2)} <span className="text-lg">tons CO<sub>2</sub>e/year</span></p>
-              </div>
-              
-              <div className="bg-gray-50 p-5 rounded-lg">
-                <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center">
-                  <FaShoppingBag className="text-green-600 mr-2" />
-                  Consumption
-                </h3>
-                <p className="text-4xl font-bold text-green-600">{results.consumptionEmissions.toFixed(2)} <span className="text-lg">tons CO<sub>2</sub>e/year</span></p>
-              </div>
-              
-              <div className="bg-gray-50 p-5 rounded-lg">
-                <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center">
-                  <FaTrash className="text-green-600 mr-2" />
-                  Waste
-                </h3>
-                <p className="text-4xl font-bold text-green-600">{results.wasteEmissions.toFixed(2)} <span className="text-lg">tons CO<sub>2</sub>e/year</span></p>
-              </div>
-              
-              <div className="bg-green-100 p-5 rounded-lg">
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">
-                  Total Carbon Footprint
-                </h3>
-                <p className="text-4xl font-bold text-green-700">{results.totalEmissions.toFixed(2)} <span className="text-lg">tons CO<sub>2</sub>e/year</span></p>
+              <div className="mt-4 bg-pale-lime bg-opacity-20 border border-sage rounded-lg p-3 text-sm text-gray-700">
+                <p className="flex items-center">
+                  <svg className="w-4 h-4 mr-2 text-dark-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  The average American's carbon footprint is about 16 metric tons per year
+                </p>
+                {results.totalEmissions < 8 && (
+                  <p className="flex items-center mt-2 text-dark-forest">
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Great job! Your footprint is significantly below average.
+                  </p>
+                )}
+                {results.totalEmissions >= 8 && results.totalEmissions < 16 && (
+                  <p className="flex items-center mt-2 text-sage">
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    Your footprint is below average, but there's room for improvement.
+                  </p>
+                )}
+                {results.totalEmissions >= 16 && (
+                  <p className="flex items-center mt-2 text-dark-forest font-medium">
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Your footprint is above average. Check out our tips section to reduce your impact.
+                  </p>
+                )}
               </div>
             </div>
             
-            <div className="bg-gray-50 p-6 rounded-lg mb-8">
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">How You Compare</h3>
-              <p className="mb-4">The average person in the United States has a carbon footprint of approximately 15 tons CO<sub>2</sub>e per year. The global average is about 4 tons CO<sub>2</sub>e per year.</p>
-              
-              <div className="relative h-8 bg-gray-200 rounded-full overflow-hidden mb-2">
-                <div 
-                  className="absolute h-full bg-green-600 rounded-full"
-                  style={{ width: `${Math.min(100, (results.totalEmissions / 20) * 100)}%` }}
-                ></div>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-8">
+              <div className="bg-white p-5 rounded-lg border border-sage shadow-sm transition-transform hover:scale-105">
+                <div className="flex justify-between items-start">
+                  <h4 className="font-medium text-dark-forest flex items-center">
+                    <FaCar className="mr-2 text-sage" /> Transportation
+                  </h4>
+                  <div className="bg-pale-lime bg-opacity-50 rounded-full h-8 w-8 flex items-center justify-center">
+                    <span className="text-xs font-medium text-dark-forest">{Math.round(results.transportationEmissions / results.totalEmissions * 100)}%</span>
+                  </div>
+                </div>
+                <p className="text-2xl font-bold mt-2 text-gray-800">{results.transportationEmissions.toFixed(2)} <span className="text-sm font-medium text-gray-500">tons</span></p>
+                <div className="mt-2 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
+                  <div className="bg-sage h-full" style={{ width: `${Math.min(100, (results.transportationEmissions / 5) * 100)}%` }}></div>
+                </div>
               </div>
               
-              <div className="flex justify-between text-sm text-gray-600">
-                <span>0 tons</span>
-                <span>5 tons</span>
-                <span>10 tons</span>
-                <span>15 tons</span>
-                <span>20+ tons</span>
+              <div className="bg-white p-5 rounded-lg border border-sage shadow-sm transition-transform hover:scale-105">
+                <div className="flex justify-between items-start">
+                  <h4 className="font-medium text-dark-forest flex items-center">
+                    <FaHome className="mr-2 text-sage" /> Home Energy
+                  </h4>
+                  <div className="bg-pale-lime bg-opacity-50 rounded-full h-8 w-8 flex items-center justify-center">
+                    <span className="text-xs font-medium text-dark-forest">{Math.round(results.homeEnergyEmissions / results.totalEmissions * 100)}%</span>
+                  </div>
+                </div>
+                <p className="text-2xl font-bold mt-2 text-gray-800">{results.homeEnergyEmissions.toFixed(2)} <span className="text-sm font-medium text-gray-500">tons</span></p>
+                <div className="mt-2 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
+                  <div className="bg-sage h-full" style={{ width: `${Math.min(100, (results.homeEnergyEmissions / 5) * 100)}%` }}></div>
+                </div>
+              </div>
+              
+              <div className="bg-white p-5 rounded-lg border border-sage shadow-sm transition-transform hover:scale-105">
+                <div className="flex justify-between items-start">
+                  <h4 className="font-medium text-dark-forest flex items-center">
+                    <FaUtensils className="mr-2 text-sage" /> Food Consumption
+                  </h4>
+                  <div className="bg-pale-lime bg-opacity-50 rounded-full h-8 w-8 flex items-center justify-center">
+                    <span className="text-xs font-medium text-dark-forest">{Math.round(results.foodEmissions / results.totalEmissions * 100)}%</span>
+                  </div>
+                </div>
+                <p className="text-2xl font-bold mt-2 text-gray-800">{results.foodEmissions.toFixed(2)} <span className="text-sm font-medium text-gray-500">tons</span></p>
+                <div className="mt-2 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
+                  <div className="bg-sage h-full" style={{ width: `${Math.min(100, (results.foodEmissions / 5) * 100)}%` }}></div>
+                </div>
+              </div>
+              
+              <div className="bg-white p-5 rounded-lg border border-green-100 shadow-sm transition-transform hover:scale-105">
+                <div className="flex justify-between items-start">
+                  <h4 className="font-medium text-dark-forest flex items-center">
+                    <FaShoppingBag className="mr-2 text-sage" /> Consumption
+                  </h4>
+                  <div className="bg-pale-lime bg-opacity-50 rounded-full h-8 w-8 flex items-center justify-center">
+                    <span className="text-xs font-medium text-dark-forest">{Math.round(results.consumptionEmissions / results.totalEmissions * 100)}%</span>
+                  </div>
+                </div>
+                <p className="text-2xl font-bold mt-2 text-gray-800">{results.consumptionEmissions.toFixed(2)} <span className="text-sm font-medium text-gray-500">tons</span></p>
+                <div className="mt-2 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
+                  <div className="bg-sage h-full" style={{ width: `${Math.min(100, (results.consumptionEmissions / 5) * 100)}%` }}></div>
+                </div>
+              </div>
+              
+              <div className="bg-white p-5 rounded-lg border border-sage shadow-sm transition-transform hover:scale-105">
+                <div className="flex justify-between items-start">
+                  <h4 className="font-medium text-dark-forest flex items-center">
+                    <FaTrash className="mr-2 text-sage" /> Waste
+                  </h4>
+                  <div className="bg-pale-lime bg-opacity-50 rounded-full h-8 w-8 flex items-center justify-center">
+                    <span className="text-xs font-medium text-dark-forest">{Math.round(results.wasteEmissions / results.totalEmissions * 100)}%</span>
+                  </div>
+                </div>
+                <p className="text-2xl font-bold mt-2 text-gray-800">{results.wasteEmissions.toFixed(2)} <span className="text-sm font-medium text-gray-500">tons</span></p>
+                <div className="mt-2 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
+                  <div className="bg-sage h-full" style={{ width: `${Math.min(100, (results.wasteEmissions / 5) * 100)}%` }}></div>
+                </div>
               </div>
             </div>
             
             <div className="text-center">
-              <Link 
-                href="/what-we-do" 
-                className="px-8 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 text-lg inline-block"
-              >
-                Offset Your Carbon Footprint
-              </Link>
+              <div className="mt-4">
+                <a 
+                  href="/offset" 
+                  className="inline-flex items-center text-dark-forest hover:text-sage transition-colors"
+                >
+                  <FaLeaf className="mr-2" /> Offset Your Carbon Footprint
+                  <FaArrowRight className="ml-2 text-sm" />
+                </a>
+              </div>
             </div>
           </motion.div>
         )}
-      </section>
 
-      {/* Tips Section */}
-      <section className="container mx-auto px-4 py-12">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-green-700 mb-8 text-center">Tips to Reduce Your Carbon Footprint</h2>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="flex items-center mb-3">
-                <FaCar className="text-green-600 text-xl mr-2" />
-                <h3 className="text-xl font-semibold text-gray-800">Transportation</h3>
-              </div>
-              <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                <li>Use public transportation when possible</li>
-                <li>Consider carpooling or ridesharing</li>
-                <li>Choose electric or hybrid vehicles</li>
-                <li>Combine errands to minimize trips</li>
-                <li>Walk or bike for short distances</li>
+        {/* Tips Section */}
+        <div className="mt-20 pb-16 max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-8 text-dark-forest">Tips to Reduce Your Carbon Footprint</h2>
+          <div className="grid gap-8 md:grid-cols-2">
+            
+            {/* Transportation Tips */}
+            <div className="bg-white p-6 rounded-xl shadow-md border border-sage">
+              <h3 className="text-xl font-semibold mb-4 text-dark-forest flex items-center">
+                <FaCar className="mr-2 text-sage" /> Transportation
+              </h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Use public transportation when possible</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Consider carpooling or ridesharing options</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Maintain your vehicle regularly for optimal efficiency</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Consider an electric or hybrid vehicle for your next purchase</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Walk or bike for short trips when weather permits</span>
+                </li>
               </ul>
             </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="flex items-center mb-3">
-                <FaHome className="text-green-600 text-xl mr-2" />
-                <h3 className="text-xl font-semibold text-gray-800">Home Energy</h3>
-              </div>
-              <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                <li>Switch to LED light bulbs</li>
-                <li>Install a programmable thermostat</li>
-                <li>Upgrade to energy-efficient appliances</li>
-                <li>Improve home insulation</li>
-                <li>Consider solar panels or renewable energy options</li>
+
+            {/* Home Energy Tips */}
+            <div className="bg-white p-6 rounded-xl shadow-md border border-sage">
+              <h3 className="text-xl font-semibold mb-4 text-dark-forest flex items-center">
+                <FaHome className="mr-2 text-sage" /> Home Energy
+              </h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Switch to renewable energy if available</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Use energy-efficient appliances</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Improve home insulation</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Turn off lights and electronics when not in use</span>
+                </li>
               </ul>
             </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="flex items-center mb-3">
-                <FaUtensils className="text-green-600 text-xl mr-2" />
-                <h3 className="text-xl font-semibold text-gray-800">Food</h3>
-              </div>
-              <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                <li>Reduce meat consumption, especially beef</li>
-                <li>Choose locally grown and seasonal foods</li>
-                <li>Minimize food waste</li>
-                <li>Grow your own herbs or vegetables</li>
-                <li>Support sustainable farming practices</li>
+
+            {/* Food Tips */}
+            <div className="bg-white p-6 rounded-xl shadow-md border border-sage">
+              <h3 className="text-xl font-semibold mb-4 text-dark-forest flex items-center">
+                <FaUtensils className="mr-2 text-sage" /> Food
+              </h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Reduce meat consumption</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Buy local and seasonal produce</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Minimize food waste</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Choose organic products when possible</span>
+                </li>
               </ul>
             </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="flex items-center mb-3">
-                <FaShoppingBag className="text-green-600 text-xl mr-2" />
-                <h3 className="text-xl font-semibold text-gray-800">Consumption</h3>
-              </div>
-              <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                <li>Buy quality items that last longer</li>
-                <li>Repair items instead of replacing them</li>
-                <li>Shop secondhand when possible</li>
-                <li>Borrow or rent items used infrequently</li>
-                <li>Choose products with minimal packaging</li>
+
+            {/* Waste Tips */}
+            <div className="bg-white p-6 rounded-xl shadow-md border border-sage">
+              <h3 className="text-xl font-semibold mb-4 text-dark-forest flex items-center">
+                <FaTrash className="mr-2 text-sage" /> Waste
+              </h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Recycle paper, plastic, glass, and metal</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Compost food scraps and yard waste</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Reduce single-use plastics</span>
+                </li>
+                <li className="flex items-start">
+                  <div className="flex-shrink-0 h-5 w-5 text-sage">✓</div>
+                  <span className="ml-2 text-gray-700">Buy less, reuse more</span>
+                </li>
               </ul>
             </div>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
   );
 } 

@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  reactStrictMode: true,
+  // Ensure Next.js uses both /app and /pages directories
+  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
 };
 
 module.exports = nextConfig; 

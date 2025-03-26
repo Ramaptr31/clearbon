@@ -1,0 +1,77 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="600" height="400" fill="#FFFFFF" />
+  
+  <!-- Background pattern -->
+  <rect width="600" height="400" fill="url(#bg-pattern)" opacity="0.05" />
+  
+  <!-- Earth representation - minimalist abstract -->
+  <circle cx="300" cy="200" r="120" fill="#EFF6E0" stroke="#85B09A" stroke-width="2" />
+  
+  <!-- Continents silhouettes - abstract minimalist shapes -->
+  <path d="M250 120 Q270 110 290 115 Q310 120 315 135 Q320 150 305 160 Q290 165 275 155 Q260 145 250 120" fill="#1A4D2E" opacity="0.15" />
+  <path d="M340 140 Q360 130 370 145 Q380 160 365 170 Q350 175 340 160 Q335 150 340 140" fill="#1A4D2E" opacity="0.15" />
+  <path d="M230 170 Q250 160 270 175 Q290 190 280 210 Q270 230 250 225 Q230 220 225 200 Q220 180 230 170" fill="#1A4D2E" opacity="0.15" />
+  <path d="M310 190 Q330 180 345 195 Q360 210 350 230 Q340 245 320 240 Q300 235 295 215 Q290 195 310 190" fill="#1A4D2E" opacity="0.15" />
+  <path d="M250 260 Q270 250 285 265 Q300 280 290 295 Q280 310 260 305 Q240 300 235 280 Q230 260 250 260" fill="#1A4D2E" opacity="0.15" />
+  
+  <!-- Carbon cycle flow - abstract representation -->
+  <g opacity="0.8">
+    <!-- Circular flow -->
+    <path d="M300 80 A120 120 0 1 1 300 320 A120 120 0 1 1 300 80" 
+          stroke="#4B7B58" 
+          stroke-width="1.5" 
+          fill="none" 
+          stroke-dasharray="8 4" />
+    
+    <!-- Flow indicators (arrows) -->
+    <path d="M380 120 L390 110 L395 125" stroke="#4B7B58" stroke-width="1.5" fill="none" />
+    <path d="M220 280 L210 290 L205 275" stroke="#4B7B58" stroke-width="1.5" fill="none" />
+  </g>
+  
+  <!-- Trees - carbon sinks -->
+  <g transform="translate(150, 200)">
+    <line x1="0" y1="0" x2="0" y2="30" stroke="#4B7B58" stroke-width="3" />
+    <circle cx="0" cy="-15" r="15" fill="#85B09A" opacity="0.8" />
+  </g>
+  
+  <g transform="translate(180, 190)">
+    <line x1="0" y1="0" x2="0" y2="25" stroke="#4B7B58" stroke-width="2.5" />
+    <circle cx="0" cy="-12" r="12" fill="#85B09A" opacity="0.7" />
+  </g>
+  
+  <g transform="translate(450, 210)">
+    <line x1="0" y1="0" x2="0" y2="30" stroke="#4B7B58" stroke-width="3" />
+    <circle cx="0" cy="-15" r="15" fill="#85B09A" opacity="0.8" />
+  </g>
+  
+  <g transform="translate(420, 200)">
+    <line x1="0" y1="0" x2="0" y2="25" stroke="#4B7B58" stroke-width="2.5" />
+    <circle cx="0" cy="-12" r="12" fill="#85B09A" opacity="0.7" />
+  </g>
+  
+  <!-- Carbon symbol - central to the offset concept -->
+  <g>
+    <circle cx="300" cy="200" r="30" fill="#FFFFFF" stroke="#1A4D2E" stroke-width="1.5" />
+    <text x="300" y="200" font-family="Inter, sans-serif" font-size="30" font-weight="700" text-anchor="middle" dominant-baseline="middle" fill="#1A4D2E">C</text>
+    
+    <!-- Carbon dioxide representation -->
+    <text x="313" y="190" font-family="Inter, sans-serif" font-size="16" font-weight="700" text-anchor="middle" dominant-baseline="middle" fill="#4B7B58">O₂</text>
+  </g>
+  
+  <!-- Exchange arrows - carbon offset concept -->
+  <g>
+    <path d="M380 160 Q430 150 450 180" stroke="#1A4D2E" stroke-width="2" fill="none" />
+    <path d="M450 180 L440 170 L460 175" fill="#1A4D2E" />
+    
+    <path d="M220 240 Q170 250 150 220" stroke="#1A4D2E" stroke-width="2" fill="none" />
+    <path d="M150 220 L160 230 L140 225" fill="#1A4D2E" />
+  </g>
+  
+  <!-- Definitions -->
+  <defs>
+    <pattern id="bg-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="1" fill="#1A4D2E" opacity="0.3" />
+    </pattern>
+  </defs>
+</svg> 

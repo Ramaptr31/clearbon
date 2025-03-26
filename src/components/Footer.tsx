@@ -1,131 +1,239 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
+import { FaTwitter, FaLinkedin, FaInstagram, FaFacebook, FaYoutube } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { FaTwitter, FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
-interface FooterProps {}
+// Animation variants
+const footerContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    }
+  }
+};
 
-const Footer: React.FC<FooterProps> = () => {
-  const footerLinks = [
-    {
-      title: 'About',
-      links: [
-        { name: 'About Us', href: '/about' },
-        { name: 'Our Mission', href: '/about#mission' },
-        { name: 'Our Team', href: '/about#team' },
-      ],
-    },
-    {
-      title: 'Services',
-      links: [
-        { name: 'What We Do', href: '/what-we-do' },
-        { name: 'Carbon Calculator', href: '/calculator' },
-        { name: 'Carbon Footprint', href: '/what-we-do#footprint' },
-        { name: 'Carbon Offset', href: '/what-we-do#offset' },
-        { name: 'Trading Process', href: '/what-we-do#trading' },
-      ],
-    },
-    {
-      title: 'Resources',
-      links: [
-        { name: 'News', href: '/news' },
-        { name: 'FAQs', href: '/faqs' },
-        { name: 'Privacy Policy', href: '/privacy-policy' },
-        { name: 'Terms & Conditions', href: '/terms-conditions' },
-      ],
-    },
-  ];
+const footerItemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.1, 0.9, 0.2, 1]
+    }
+  }
+};
 
-  const socialLinks = [
-    { name: 'Twitter', icon: <FaTwitter className="w-5 h-5" />, href: 'https://twitter.com' },
-    { name: 'Facebook', icon: <FaFacebookF className="w-5 h-5" />, href: 'https://facebook.com' },
-    { name: 'Instagram', icon: <FaInstagram className="w-5 h-5" />, href: 'https://instagram.com' },
-    { name: 'LinkedIn', icon: <FaLinkedinIn className="w-5 h-5" />, href: 'https://linkedin.com' },
-  ];
+const socialIconVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.4,
+      ease: [0.1, 0.9, 0.2, 1]
+    }
+  },
+  hover: {
+    scale: 1.15,
+    rotate: 5,
+    transition: {
+      duration: 0.3,
+      ease: [0.1, 0.9, 0.2, 1]
+    }
+  }
+};
+
+export default function Footer() {
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 pt-16 pb-8">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          {/* Company Info */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="lg:col-span-2"
-          >
-            <Link href="/" className="flex items-center space-x-2 mb-6">
-              <span className="text-2xl font-bold text-primary">Clearbon</span>
-            </Link>
-            <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-md">
-              Clearbon is a platform that connects companies and NGOs to facilitate carbon trading, helping reduce carbon emissions and combat climate change.
+    <motion.footer 
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      variants={footerContainerVariants}
+      className="bg-pale-lime/15 dark:bg-gray-900 border-t border-sage/20 dark:border-gray-800/50 mt-10"
+    >
+      <div className="container py-12 md:py-16">
+        {/* Newsletter - Now moved to the top */}
+        <motion.div 
+          className="mb-16 pb-8 border-b border-sage/20 dark:border-gray-800/50"
+          variants={footerItemVariants}
+        >
+          <div className="max-w-xl mx-auto">
+            <h3 className="text-lg font-semibold mb-5 text-dark-forest dark:text-pale-lime text-center">Stay Updated</h3>
+            <p className="text-gray-700 dark:text-gray-300 text-center mb-6">
+              Subscribe to our newsletter for the latest updates on carbon trading and environmental sustainability.
             </p>
-            <div className="flex space-x-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-300"
-                  aria-label={social.name}
-                >
-                  {social.icon}
-                </a>
-              ))}
+            <form className="flex flex-col sm:flex-row gap-3">
+              <input 
+                type="email" 
+                placeholder="Your email address" 
+                className="px-4 py-3 flex-grow rounded-lg border border-sage/30 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sage focus:border-transparent transition-all duration-300"
+                aria-label="Email address"
+                required
+              />
+              <button 
+                type="submit" 
+                className="btn btn-primary hover-lift focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sage"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-x-8 gap-y-10">
+          {/* Logo and description */}
+          <motion.div className="lg:col-span-2" variants={footerItemVariants}>
+            <Link href="/" className="inline-flex items-center group">
+              <div className="relative w-10 h-10 mr-3 transition-all duration-300 group-hover:scale-110">
+                <Image 
+                  src="/logo.svg" 
+                  alt="Clearbon Logo" 
+                  fill 
+                  className="object-contain"
+                />
+              </div>
+              <span className="text-xl font-bold text-dark-forest dark:text-pale-lime tracking-tight hover-underline">Clearbon</span>
+            </Link>
+            <p className="mt-5 text-gray-700 dark:text-gray-300 max-w-md">
+              Making carbon trading accessible and transparent. Join us in our mission to create a more sustainable future through effective carbon management.
+            </p>
+            
+            {/* Social Media Links */}
+            <div className="flex space-x-4 mt-6">
+              <motion.a 
+                href="https://twitter.com/clearbon" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-sage/30 dark:bg-dark-forest/30 text-dark-forest dark:text-pale-lime hover:bg-dark-forest hover:text-white dark:hover:bg-pale-lime dark:hover:text-dark-forest transition-all duration-300"
+                aria-label="Twitter"
+                variants={socialIconVariants}
+                whileHover="hover"
+              >
+                <FaTwitter size={18} />
+              </motion.a>
+              <motion.a 
+                href="https://linkedin.com/company/clearbon" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-sage/30 dark:bg-dark-forest/30 text-dark-forest dark:text-pale-lime hover:bg-dark-forest hover:text-white dark:hover:bg-pale-lime dark:hover:text-dark-forest transition-all duration-300"
+                aria-label="LinkedIn"
+                variants={socialIconVariants}
+                whileHover="hover"
+              >
+                <FaLinkedin size={18} />
+              </motion.a>
+              <motion.a 
+                href="https://instagram.com/clearbon" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-sage/30 dark:bg-dark-forest/30 text-dark-forest dark:text-pale-lime hover:bg-dark-forest hover:text-white dark:hover:bg-pale-lime dark:hover:text-dark-forest transition-all duration-300"
+                aria-label="Instagram"
+                variants={socialIconVariants}
+                whileHover="hover"
+              >
+                <FaInstagram size={18} />
+              </motion.a>
+              <motion.a 
+                href="https://facebook.com/clearbon" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-sage/30 dark:bg-dark-forest/30 text-dark-forest dark:text-pale-lime hover:bg-dark-forest hover:text-white dark:hover:bg-pale-lime dark:hover:text-dark-forest transition-all duration-300"
+                aria-label="Facebook"
+                variants={socialIconVariants}
+                whileHover="hover"
+              >
+                <FaFacebook size={18} />
+              </motion.a>
+              <motion.a 
+                href="https://youtube.com/clearbon" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-sage/30 dark:bg-dark-forest/30 text-dark-forest dark:text-pale-lime hover:bg-dark-forest hover:text-white dark:hover:bg-pale-lime dark:hover:text-dark-forest transition-all duration-300"
+                aria-label="YouTube"
+                variants={socialIconVariants}
+                whileHover="hover"
+              >
+                <FaYoutube size={18} />
+              </motion.a>
             </div>
           </motion.div>
 
-          {/* Links */}
-          {footerLinks.map((column, index) => (
-            <motion.div
-              key={column.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">{column.title}</h3>
-              <ul className="space-y-3">
-                {column.links.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-300"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+          {/* Quick Links */}
+          <motion.div variants={footerItemVariants}>
+            <h3 className="text-lg font-semibold mb-5 text-dark-forest dark:text-pale-lime">Company</h3>
+            <ul className="space-y-3">
+              {['About', 'Our Mission', 'Our Team', 'Careers', 'Contact Us'].map((item) => (
+                <li key={item}>
+                  <Link href={`/${item.toLowerCase().replace(/\s+/g, '-')}`} className="text-gray-700 dark:text-gray-300 hover:text-dark-forest dark:hover:text-pale-lime transition-colors duration-300 hover-slide-x inline-flex">
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Services */}
+          <motion.div variants={footerItemVariants}>
+            <h3 className="text-lg font-semibold mb-5 text-dark-forest dark:text-pale-lime">Services</h3>
+            <ul className="space-y-3">
+              {['Carbon Calculator', 'Carbon Offset', 'Trading Process', 'For Businesses', 'For Individuals'].map((item) => (
+                <li key={item}>
+                  <Link href={`/${item.toLowerCase().replace(/\s+/g, '-')}`} className="text-gray-700 dark:text-gray-300 hover:text-dark-forest dark:hover:text-pale-lime transition-colors duration-300 hover-slide-x inline-flex">
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Resources */}
+          <motion.div variants={footerItemVariants}>
+            <h3 className="text-lg font-semibold mb-5 text-dark-forest dark:text-pale-lime">Resources</h3>
+            <ul className="space-y-3">
+              {['News', 'FAQs', 'Documentation', 'Privacy Policy', 'Terms & Conditions'].map((item) => (
+                <li key={item}>
+                  <Link href={`/${item.toLowerCase().replace(/\s+/g, '-')}`} className="text-gray-700 dark:text-gray-300 hover:text-dark-forest dark:hover:text-pale-lime transition-colors duration-300 hover-slide-x inline-flex">
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="border-t border-gray-200 dark:border-gray-800 mt-12 pt-8 text-center text-sm text-gray-600 dark:text-gray-400"
+        {/* Bottom section */}
+        <motion.div 
+          className="mt-16 pt-8 border-t border-sage/20 dark:border-gray-800/50 text-center"
+          variants={footerItemVariants}
         >
-          <p>
-            &copy; {new Date().getFullYear()} Clearbon. All rights reserved.
+          <p className="text-gray-700 dark:text-gray-400 text-sm">
+            © {currentYear} Clearbon. All rights reserved.
           </p>
-          <div className="mt-2 flex justify-center space-x-4">
-            <Link href="/privacy-policy" className="hover:text-primary transition-colors duration-300">
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 mt-5 text-sm text-gray-700 dark:text-gray-400">
+            <Link href="/privacy-policy" className="hover:text-dark-forest dark:hover:text-pale-lime transition-colors duration-300 hover-underline">
               Privacy Policy
             </Link>
-            <Link href="/terms-conditions" className="hover:text-primary transition-colors duration-300">
+            <Link href="/terms-conditions" className="hover:text-dark-forest dark:hover:text-pale-lime transition-colors duration-300 hover-underline">
               Terms & Conditions
+            </Link>
+            <Link href="/sitemap" className="hover:text-dark-forest dark:hover:text-pale-lime transition-colors duration-300 hover-underline">
+              Sitemap
+            </Link>
+            <Link href="/contact" className="hover:text-dark-forest dark:hover:text-pale-lime transition-colors duration-300 hover-underline">
+              Contact
             </Link>
           </div>
         </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   );
-};
-
-export default Footer; 
+} 

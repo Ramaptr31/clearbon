@@ -5,33 +5,75 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaLeaf, FaIndustry, FaExchangeAlt, FaChartLine } from 'react-icons/fa';
+import { FaLeaf, FaIndustry, FaExchangeAlt, FaChartLine, FaShieldAlt } from 'react-icons/fa';
+
+// Scroll reveal hook implementation
+const useScrollReveal = () => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  
+  return { ref, inView };
+};
 
 // Animation variants
-const fadeIn = {
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { 
+      duration: 0.8, 
+      ease: [0.1, 0.9, 0.2, 1] 
+    } 
+  }
+};
+
+const staggerContainer = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.8 } },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    }
+  }
 };
 
-const slideUp = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+const itemVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { 
+      duration: 0.6, 
+      ease: "easeOut" 
+    } 
+  }
 };
 
-const slideRight = {
-  hidden: { opacity: 0, x: -50 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8 } },
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    transition: { 
+      duration: 0.6, 
+      ease: [0.16, 1, 0.3, 1] 
+    } 
+  }
 };
 
 export default function Home() {
   // Info card hover state
   const [activeInfoCard, setActiveInfoCard] = useState<number | null>(null);
 
-  // Intersection observer hooks
-  const [heroRef, heroInView] = useInView({ threshold: 0.1, triggerOnce: true });
-  const [infoRef, infoInView] = useInView({ threshold: 0.1, triggerOnce: true });
-  const [newsRef, newsInView] = useInView({ threshold: 0.1, triggerOnce: true });
-  const [ctaRef, ctaInView] = useInView({ threshold: 0.1, triggerOnce: true });
+  // Define scroll reveal refs for different sections
+  const heroRef = useScrollReveal();
+  const infoRef = useScrollReveal();
+  const newsRef = useScrollReveal();
+  const ctaRef = useScrollReveal();
 
   // Dummy news data
   const newsItems = [
@@ -64,241 +106,338 @@ export default function Home() {
       id: 1,
       title: 'Carbon Footprint',
       description: 'Understand and measure the total greenhouse gas emissions caused by an individual, event, organization, service, or product.',
-      icon: <FaLeaf className="text-4xl text-primary" />,
+      icon: <FaLeaf className="w-10 h-10" />,
       hoverDescription: 'Companies can track emissions from electricity use, transportation, and product manufacturing to identify reduction opportunities.',
     },
     {
       id: 2,
       title: 'Emissions Sources',
       description: 'Identify the primary sources of carbon emissions in different sectors of the economy and business operations.',
-      icon: <FaIndustry className="text-4xl text-primary" />,
+      icon: <FaIndustry className="w-10 h-10" />,
       hoverDescription: 'Major emission sources include energy production, transportation, industrial processes, and agriculture.',
     },
     {
       id: 3,
       title: 'Carbon Trading',
       description: 'A market-based approach to controlling pollution by providing economic incentives for reducing emissions.',
-      icon: <FaExchangeAlt className="text-4xl text-primary" />,
+      icon: <FaExchangeAlt className="w-10 h-10" />,
       hoverDescription: 'Companies that reduce emissions below targets can sell excess credits to those who exceed their limits.',
     },
     {
       id: 4,
       title: 'Offset Projects',
       description: 'Initiatives that reduce, avoid, or capture greenhouse gas emissions to compensate for emissions occurring elsewhere.',
-      icon: <FaChartLine className="text-4xl text-primary" />,
+      icon: <FaChartLine className="w-10 h-10" />,
       hoverDescription: 'Projects include reforestation, renewable energy development, methane capture, and energy efficiency improvements.',
     },
   ];
 
   return (
-    <div className="pt-16">
+    <main className="min-h-screen overflow-hidden">
       {/* Hero Section */}
-      <section 
-        ref={heroRef} 
-        className="min-h-[80vh] flex items-center relative overflow-hidden"
+      <motion.section 
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+        ref={heroRef.ref}
+        className={`section-lg relative bg-pale-lime/20 dark:bg-gray-900 ${heroRef.inView ? 'reveal-on-scroll is-revealed' : 'reveal-on-scroll'}`}
       >
-        <div className="absolute inset-0 -z-10">
-          <Image
-            src="/images/hero-bg.jpg"
-            alt="Forest landscape"
-            fill
-            priority
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 py-20">
-          <motion.div
+        <div className="container relative z-10">
+          <motion.div 
+            className="max-w-3xl mx-auto text-center"
+            variants={staggerContainer}
             initial="hidden"
-            animate={heroInView ? "visible" : "hidden"}
-            variants={fadeIn}
-            className="max-w-3xl text-white"
+            animate="visible"
           >
             <motion.h1 
-              className="text-4xl md:text-6xl font-bold mb-6"
-              variants={slideRight}
+              className="gradient-text font-bold mb-6"
+              variants={itemVariant}
             >
-              Start Your Carbon Journey
+              Carbon Trading Made Simple
             </motion.h1>
             <motion.p 
-              className="text-lg md:text-xl mb-8 text-gray-200"
-              variants={slideRight}
-              transition={{ delay: 0.1 }}
+              className="text-lg md:text-xl mb-8 text-gray-700 dark:text-gray-300"
+              variants={itemVariant}
             >
-              Join the global effort to reduce carbon emissions through innovative carbon trading and offset solutions that benefit both businesses and the environment.
+              Offset your carbon footprint with our transparent and efficient trading platform. 
+              Join the global movement for a sustainable future.
             </motion.p>
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4"
-              variants={slideRight}
-              transition={{ delay: 0.2 }}
+              className="flex flex-col sm:flex-row gap-5 justify-center"
+              variants={itemVariant}
             >
-              <Link 
-                href="/what-we-do" 
-                className="px-8 py-3 bg-primary hover:bg-secondary transition-colors duration-300 text-white font-semibold rounded-full text-center"
-              >
-                Explore Solutions
+              <Link href="/calculator" className="btn btn-primary btn-hover-slide">
+                <span>Calculate Your Footprint</span>
               </Link>
-              <Link 
-                href="/about" 
-                className="px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-colors duration-300 text-white font-semibold rounded-full text-center"
-              >
+              <Link href="/about" className="btn btn-outline hover-zoom">
                 Learn More
               </Link>
             </motion.div>
           </motion.div>
         </div>
-      </section>
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 overflow-hidden z-0">
+          <motion.div 
+            className="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-sage/20 blur-3xl"
+            animate={{ 
+              scale: [1, 1.05, 1],
+              opacity: [0.5, 0.7, 0.5],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+          />
+          <motion.div 
+            className="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-dark-forest/10 blur-3xl"
+            animate={{ 
+              scale: [1, 1.1, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              repeatType: "reverse",
+              delay: 1
+            }}
+          />
+        </div>
+      </motion.section>
 
       {/* Interactive Information Section */}
-      <section 
-        ref={infoRef}
-        className="py-20 bg-gray-50 dark:bg-gray-900"
+      <motion.section 
+        ref={infoRef.ref}
+        className={`section ${infoRef.inView ? 'reveal-on-scroll is-revealed' : 'reveal-on-scroll'}`}
       >
-        <div className="container mx-auto px-4">
+        <div className="container">
           <motion.div 
+            className="text-center mb-14"
             initial="hidden"
-            animate={infoInView ? "visible" : "hidden"}
-            variants={fadeIn}
-            className="text-center mb-16"
+            animate={infoRef.inView ? "visible" : "hidden"}
+            variants={fadeInUp}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-              Understanding Carbon Impact
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Learn about the environmental impact of carbon emissions and how carbon trading can help mitigate climate change.
-            </p>
+            <h2 className="text-dark-forest dark:text-pale-lime font-semibold mb-5">Why Choose Clearbon?</h2>
+            <p className="max-w-2xl mx-auto">Our platform offers a transparent, efficient, and secure way to trade carbon credits and offset your carbon footprint.</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {infoCards.map((card, index) => (
-              <motion.div
-                key={card.id}
-                initial="hidden"
-                animate={infoInView ? "visible" : "hidden"}
-                variants={slideUp}
-                transition={{ delay: index * 0.1 }}
-                className={`bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover-lift ${
-                  activeInfoCard === card.id ? 'border-primary border-2' : 'border border-gray-200 dark:border-gray-700'
-                } transition-all duration-300`}
-                onMouseEnter={() => setActiveInfoCard(card.id)}
-                onMouseLeave={() => setActiveInfoCard(null)}
-              >
-                <div className="flex justify-center mb-4">
-                  {card.icon}
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-gap-lg"
+            initial="hidden"
+            animate={infoRef.inView ? "visible" : "hidden"}
+            variants={staggerContainer}
+          >
+            {/* Feature Card 1 */}
+            <motion.div 
+              className="card card-hover hover-lift"
+              variants={itemVariant}
+            >
+              <div className="card-body">
+                <div className="mb-5 text-dark-forest">
+                  <FaLeaf className="w-10 h-10" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white text-center">
-                  {card.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 text-center">
-                  {activeInfoCard === card.id ? card.hoverDescription : card.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+                <h3 className="text-xl font-medium mb-3 text-dark-forest">Eco-Friendly</h3>
+                <p className="text-gray-600 dark:text-gray-300">Support sustainable projects that reduce greenhouse gas emissions and combat climate change.</p>
+              </div>
+            </motion.div>
+
+            {/* Feature Card 2 */}
+            <motion.div 
+              className="card card-hover hover-lift"
+              variants={itemVariant}
+            >
+              <div className="card-body">
+                <div className="mb-5 text-dark-forest">
+                  <FaChartLine className="w-10 h-10" />
+                </div>
+                <h3 className="text-xl font-medium mb-3 text-dark-forest">Transparent</h3>
+                <p className="text-gray-600 dark:text-gray-300">Full visibility into carbon credit sources, prices, and impacts through our blockchain-based platform.</p>
+              </div>
+            </motion.div>
+
+            {/* Feature Card 3 */}
+            <motion.div 
+              className="card card-hover hover-lift"
+              variants={itemVariant}
+            >
+              <div className="card-body">
+                <div className="mb-5 text-dark-forest">
+                  <FaExchangeAlt className="w-10 h-10" />
+                </div>
+                <h3 className="text-xl font-medium mb-3 text-dark-forest">Efficient</h3>
+                <p className="text-gray-600 dark:text-gray-300">Fast and low-cost transactions with our streamlined trading process and minimal fees.</p>
+              </div>
+            </motion.div>
+
+            {/* Feature Card 4 */}
+            <motion.div 
+              className="card card-hover hover-lift"
+              variants={itemVariant}
+            >
+              <div className="card-body">
+                <div className="mb-5 text-dark-forest">
+                  <FaShieldAlt className="w-10 h-10" />
+                </div>
+                <h3 className="text-xl font-medium mb-3 text-dark-forest">Secure</h3>
+                <p className="text-gray-600 dark:text-gray-300">Advanced security measures protect your transactions and data throughout the trading process.</p>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* News Section */}
-      <section 
-        ref={newsRef}
-        className="py-20 bg-white dark:bg-gray-800"
+      <motion.section 
+        ref={newsRef.ref}
+        className={`section bg-pale-lime/20 dark:bg-gray-900 ${newsRef.inView ? 'reveal-on-scroll is-revealed' : 'reveal-on-scroll'}`}
       >
-        <div className="container mx-auto px-4">
+        <div className="container">
           <motion.div 
+            className="text-center mb-14"
             initial="hidden"
-            animate={newsInView ? "visible" : "hidden"}
-            variants={fadeIn}
-            className="text-center mb-16"
+            animate={newsRef.inView ? "visible" : "hidden"}
+            variants={fadeInUp}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-              Latest Climate News
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Stay updated with the latest developments in climate policy, carbon markets, and environmental initiatives.
-            </p>
+            <h2 className="text-dark-forest dark:text-pale-lime font-semibold mb-5">Latest News</h2>
+            <p className="max-w-2xl mx-auto">Stay updated with the latest developments in carbon trading and climate action.</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {newsItems.map((news, index) => (
-              <motion.div
-                key={news.id}
-                initial="hidden"
-                animate={newsInView ? "visible" : "hidden"}
-                variants={slideRight}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover-zoom"
-              >
-                <div className="relative h-48">
-                  <Image
-                    src={news.image}
-                    alt={news.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6 border border-t-0 border-gray-200 dark:border-gray-700 flex flex-col h-64">
-                  <span className="text-sm text-primary mb-2">{news.date}</span>
-                  <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
-                    {news.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
-                    {news.summary}
-                  </p>
-                  <Link 
-                    href={`/news/${news.id}`} 
-                    className="text-primary hover:text-secondary transition-colors duration-300 font-medium"
-                  >
-                    Read More →
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
           <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 grid-gap-lg"
             initial="hidden"
-            animate={newsInView ? "visible" : "hidden"}
-            variants={fadeIn}
-            transition={{ delay: 0.4 }}
-            className="text-center mt-12"
+            animate={newsRef.inView ? "visible" : "hidden"}
+            variants={staggerContainer}
           >
-            <Link 
-              href="/news" 
-              className="px-8 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-300 text-gray-800 dark:text-white font-medium rounded-full inline-block"
+            {/* News Card 1 */}
+            <motion.div 
+              className="card card-hover overflow-hidden hover-zoom"
+              variants={scaleIn}
             >
-              View All News
-            </Link>
+              <div className="relative h-56">
+                <Image 
+                  src="/images/news-1.jpg" 
+                  alt="Carbon Market News" 
+                  fill 
+                  style={{objectFit: 'cover'}}
+                />
+              </div>
+              <div className="card-body">
+                <span className="text-sm text-sage font-medium">Market News</span>
+                <h3 className="text-xl font-medium my-3 text-dark-forest">Carbon Credits Reach All-Time High</h3>
+                <p className="text-gray-600 dark:text-gray-300 line-clamp-2">Global carbon markets saw unprecedented growth as demand for high-quality credits increases.</p>
+                <Link href="/news/carbon-credits-ath" className="mt-5 inline-block text-dark-forest hover-underline">
+                  Read More
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* News Card 2 */}
+            <motion.div 
+              className="card card-hover overflow-hidden hover-zoom"
+              variants={scaleIn}
+            >
+              <div className="relative h-56">
+                <Image 
+                  src="/images/news-2.jpg" 
+                  alt="Company Announcement" 
+                  fill 
+                  style={{objectFit: 'cover'}}
+                />
+              </div>
+              <div className="card-body">
+                <span className="text-sm text-sage font-medium">Announcement</span>
+                <h3 className="text-xl font-medium my-3 text-dark-forest">New Partnership with GreenTech</h3>
+                <p className="text-gray-600 dark:text-gray-300 line-clamp-2">Clearbon announces strategic partnership to expand sustainable technology solutions.</p>
+                <Link href="/news/greentech-partnership" className="mt-5 inline-block text-dark-forest hover-underline">
+                  Read More
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* News Card 3 */}
+            <motion.div 
+              className="card card-hover overflow-hidden hover-zoom"
+              variants={scaleIn}
+            >
+              <div className="relative h-56">
+                <Image 
+                  src="/images/news-3.jpg" 
+                  alt="Industry Insight" 
+                  fill 
+                  style={{objectFit: 'cover'}}
+                />
+              </div>
+              <div className="card-body">
+                <span className="text-sm text-sage font-medium">Insight</span>
+                <h3 className="text-xl font-medium my-3 text-dark-forest">The Future of Voluntary Carbon Markets</h3>
+                <p className="text-gray-600 dark:text-gray-300 line-clamp-2">Industry experts weigh in on trends shaping the voluntary carbon market ecosystem.</p>
+                <Link href="/news/future-vcm" className="mt-5 inline-block text-dark-forest hover-underline">
+                  Read More
+                </Link>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
-      <section 
-        ref={ctaRef}
-        className="py-20 bg-primary text-white"
+      <motion.section 
+        ref={ctaRef.ref}
+        className={`section ${ctaRef.inView ? 'reveal-on-scroll is-revealed' : 'reveal-on-scroll'}`}
       >
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
+        <div className="container">
+          <motion.div 
+            className="max-w-4xl mx-auto bg-dark-forest text-white rounded-2xl p-8 md:p-12 shadow-xl relative overflow-hidden"
             initial="hidden"
-            animate={ctaInView ? "visible" : "hidden"}
-            variants={fadeIn}
+            animate={ctaRef.inView ? "visible" : "hidden"}
+            variants={fadeInUp}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Make a Difference?
-            </h2>
-            <p className="text-lg text-white/90 max-w-2xl mx-auto mb-8">
-              Join Clearbon today and start your journey towards a more sustainable future through effective carbon management.
-            </p>
-            <Link 
-              href="/contact" 
-              className="px-8 py-3 bg-white text-primary hover:bg-gray-100 transition-colors duration-300 font-semibold rounded-full inline-block"
-            >
-              Get Started Today
-            </Link>
+            {/* Decorative elements */}
+            <div className="absolute inset-0 overflow-hidden z-0">
+              <motion.div 
+                className="absolute -right-10 -top-10 w-64 h-64 rounded-full bg-sage/20 blur-2xl"
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  x: [0, 10, 0],
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 12,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              />
+              <motion.div 
+                className="absolute -left-10 bottom-0 w-48 h-48 rounded-full bg-pale-lime/10 blur-2xl"
+                animate={{ 
+                  scale: [1, 1.3, 1],
+                  x: [0, -10, 0],
+                  y: [0, 10, 0],
+                }}
+                transition={{
+                  duration: 10,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  delay: 1
+                }}
+              />
+            </div>
+            
+            <div className="relative z-10">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Reduce Your Carbon Footprint?</h2>
+              <p className="text-lg md:text-xl mb-8 text-gray-200">Join thousands of companies and individuals making a positive impact on our planet through carbon trading.</p>
+              <div className="flex flex-col sm:flex-row gap-5">
+                <Link href="/register" className="btn bg-sage hover:bg-pale-lime hover:text-dark-forest text-dark-forest font-medium transition-all duration-300">
+                  Get Started Today
+                </Link>
+                <Link href="/contact" className="btn border border-white text-white hover:bg-white hover:text-dark-forest transition-all duration-300">
+                  Contact Us
+                </Link>
+              </div>
+            </div>
           </motion.div>
         </div>
-      </section>
-    </div>
+      </motion.section>
+    </main>
   );
 }

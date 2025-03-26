@@ -2,84 +2,281 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom color variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #4CAF50;
-  --secondary: #2E7D32;
-  --accent: #8BC34A;
-  --text: #333333;
-  --text-light: #666666;
-  --font-sans: var(--font-inter);
-  --font-mono: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', monospace;
+  --sage: #85B09A;
+  --dark-forest: #1A4D2E;
+  --pale-lime: #DBE1C8;
+  --surface: #FFFFFF;
+  --text-primary: #1F2937;
+  --text-secondary: #4B5563;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --primary: #5CBA60;
-    --secondary: #3E8D42;
-    --accent: #9BD35A;
-    --text: #ffffff;
-    --text-light: #cccccc;
+/* Base styling */
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply text-gray-800 bg-white dark:bg-gray-900 dark:text-gray-100;
+    font-family: 'Inter', 'Poppins', system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-medium leading-tight;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl mb-8;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl mb-6;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl mb-5;
+  }
+  
+  h4 {
+    @apply text-xl md:text-2xl mb-4;
+  }
+  
+  p {
+    @apply text-gray-600 dark:text-gray-300 leading-relaxed mb-5;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+/* Common components and utilities */
+@layer components {
+  .container {
+    @apply px-6 sm:px-8 lg:px-10 mx-auto;
+    max-width: 1320px; /* Set a specific max-width between 1200-1400px */
+  }
+
+  /* Section spacing */
+  .section {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+  
+  .section-sm {
+    @apply py-8 md:py-10 lg:py-12;
+  }
+  
+  .section-lg {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
+  /* Navigation link styling */
+  .nav-link {
+    @apply relative px-3 py-2 inline-flex items-center transition-colors duration-300 ease-in-out;
+  }
+  
+  .nav-link:hover {
+    @apply text-dark-forest dark:text-sage;
+  }
+  
+  /* Button styles with enhanced hover effects */
+  .btn {
+    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-md transition-all duration-300 ease-in-out font-medium relative overflow-hidden;
+  }
+  
+  .btn-primary {
+    @apply bg-dark-forest text-white hover:bg-sage focus:ring-2 focus:ring-offset-2 focus:ring-pale-lime focus:outline-none;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-dark-forest border border-sage hover:bg-pale-lime hover:bg-opacity-20 focus:ring-2 focus:ring-offset-2 focus:ring-pale-lime focus:outline-none;
+  }
+  
+  .btn-outline {
+    @apply border border-dark-forest text-dark-forest hover:bg-pale-lime/10 hover:border-sage hover:text-sage focus:ring-2 focus:ring-offset-2 focus:ring-pale-lime focus:outline-none;
+  }
+  
+  /* Advanced button hover effect */
+  .btn-hover-slide::before {
+    content: '';
+    @apply absolute inset-0 bg-sage transform -translate-x-full transition-transform duration-300 ease-in-out z-0;
+  }
+  
+  .btn-hover-slide:hover::before {
+    @apply translate-x-0;
+  }
+  
+  .btn-hover-slide span {
+    @apply relative z-10;
+  }
+
+  /* Card styles with enhanced hover */
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 transition-all duration-300 ease-in-out;
+  }
+  
+  .card-hover {
+    @apply hover:shadow-lg hover:border-sage dark:hover:border-dark-forest;
+  }
+  
+  /* Card content padding */
+  .card-body {
+    @apply p-6 md:p-7;
+  }
+
+  /* Sophisticated hover animations */
+  .hover-lift {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+  
+  .hover-lift:hover {
+    @apply -translate-y-2 shadow-lg;
+  }
+  
+  .hover-zoom {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  .hover-zoom:hover {
+    @apply scale-[1.03] shadow-lg;
+  }
+  
+  /* Refined hover underline animation */
+  .hover-underline {
+    @apply relative inline-block;
+  }
+  
+  .hover-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-sage dark:bg-pale-lime transition-all duration-300 ease-in-out origin-left;
+  }
+  
+  .hover-underline:hover::after {
+    @apply w-full;
+  }
+  
+  /* Slide transition for link hover */
+  .hover-slide-x {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+  
+  .hover-slide-x:hover {
+    @apply translate-x-1;
+  }
+
+  /* Shadow styles */
+  .shadow-soft {
+    @apply shadow-md shadow-gray-200/50 dark:shadow-gray-900/30 transition-shadow duration-300 ease-in-out;
+  }
+  
+  /* Grid spacing */
+  .grid-gap-sm {
+    @apply gap-4 md:gap-5 lg:gap-6;
+  }
+  
+  .grid-gap-md {
+    @apply gap-6 md:gap-8 lg:gap-10;
+  }
+  
+  .grid-gap-lg {
+    @apply gap-8 md:gap-10 lg:gap-12;
+  }
+  
+  /* Page header styling */
+  .page-header {
+    @apply py-10 md:py-14 lg:py-16 bg-pale-lime bg-opacity-20 border-b border-sage/20;
+  }
+  
+  .page-header-content {
+    @apply container mx-auto;
+  }
+  
+  .page-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-semibold text-dark-forest mb-5;
+  }
+  
+  .page-description {
+    @apply text-lg text-gray-600 max-w-3xl;
+  }
 }
 
-/* Animation delay utility classes */
-.delay-100 {
-  animation-delay: 100ms;
+/* Enhanced custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.delay-200 {
-  animation-delay: 200ms;
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-.delay-300 {
-  animation-delay: 300ms;
+@keyframes slideRight {
+  from { transform: translateX(-30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
-.delay-400 {
-  animation-delay: 400ms;
+@keyframes zoomIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
-.delay-500 {
-  animation-delay: 500ms;
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-in-out forwards;
 }
 
-/* Hover transition effects */
-.hover-zoom {
-  transition: transform 0.3s ease;
+.animate-slide-up {
+  animation: slideUp 0.8s ease-in-out forwards;
 }
 
-.hover-zoom:hover {
-  transform: scale(1.05);
+.animate-slide-right {
+  animation: slideRight 0.8s ease-in-out forwards;
 }
 
-.hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.animate-zoom-in {
+  animation: zoomIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.hover-lift:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+/* Animation delay variants with refined timing */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+
+/* Focus styles for accessibility */
+.focus-visible:focus-visible {
+  @apply outline-none ring-2 ring-offset-2 ring-pale-lime;
 }
 
-/* Ensure animations only play when elements are in viewport */
-.will-change-transform {
-  will-change: transform;
+/* Section animations for scroll reveal */
+.reveal-on-scroll {
+  @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
 }
 
-.will-change-opacity {
-  will-change: opacity;
+.reveal-on-scroll.is-revealed {
+  @apply opacity-100 translate-y-0;
 }
 
-.scroll-reveal {
-  opacity: 0;
+/* Gradient text for emphasis */
+.gradient-text {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-dark-forest to-sage;
+}
+
+.section-container {
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3rem 1rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .section-container {
+    padding: 4rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-container {
+    padding: 5rem 2rem;
+  }
 }

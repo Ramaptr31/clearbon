@@ -62,8 +62,8 @@ export default function Contact() {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-pale-lime bg-opacity-20 dark:bg-gray-900">
+        <div className="section-container">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -71,7 +71,7 @@ export default function Contact() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-dark-forest dark:text-white">
               Contact Us
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
@@ -83,7 +83,7 @@ export default function Contact() {
 
       {/* Contact Form & Info Section */}
       <section className="py-20 bg-white dark:bg-gray-800">
-        <div className="container mx-auto px-4">
+        <div className="section-container">
           <div className="flex flex-col lg:flex-row gap-16">
             {/* Contact Form */}
             <motion.div 
@@ -93,7 +93,7 @@ export default function Contact() {
               variants={slideUp}
               className="lg:w-2/3"
             >
-              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+              <h2 className="text-3xl font-bold mb-6 text-dark-forest dark:text-white">
                 Send Us a Message
               </h2>
               
@@ -102,14 +102,14 @@ export default function Contact() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}
-                  className="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg p-6 text-center"
+                  className="bg-pale-lime bg-opacity-20 dark:bg-sage/30 border border-sage dark:border-dark-forest rounded-lg p-6 text-center"
                 >
-                  <div className="w-16 h-16 bg-primary rounded-full mx-auto flex items-center justify-center mb-4">
+                  <div className="w-16 h-16 bg-sage rounded-full mx-auto flex items-center justify-center mb-4">
                     <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+                  <h3 className="text-xl font-semibold mb-2 text-dark-forest dark:text-white">
                     Thank You!
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -117,7 +117,7 @@ export default function Contact() {
                   </p>
                   <button
                     onClick={() => setFormSubmitted(false)}
-                    className="px-6 py-2 bg-primary hover:bg-secondary text-white font-medium rounded-md transition-colors duration-300"
+                    className="px-6 py-2 bg-dark-forest hover:bg-sage text-white font-medium rounded-md transition-colors duration-300"
                   >
                     Send Another Message
                   </button>
@@ -136,7 +136,7 @@ export default function Contact() {
                         value={formState.name}
                         onChange={handleChange}
                         required
-                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors duration-200"
+                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sage focus:border-sage outline-none transition-colors duration-200"
                       />
                     </div>
                     <div>
@@ -150,7 +150,7 @@ export default function Contact() {
                         value={formState.email}
                         onChange={handleChange}
                         required
-                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors duration-200"
+                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sage focus:border-sage outline-none transition-colors duration-200"
                       />
                     </div>
                   </div>
@@ -166,7 +166,7 @@ export default function Contact() {
                         name="company"
                         value={formState.company}
                         onChange={handleChange}
-                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors duration-200"
+                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sage focus:border-sage outline-none transition-colors duration-200"
                       />
                     </div>
                     <div>
@@ -179,7 +179,7 @@ export default function Contact() {
                         value={formState.type}
                         onChange={handleChange}
                         required
-                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors duration-200"
+                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sage focus:border-sage outline-none transition-colors duration-200"
                       >
                         <option value="company">Company looking to offset emissions</option>
                         <option value="ngo">NGO with offset projects</option>
@@ -201,13 +201,13 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       rows={5}
-                      className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors duration-200"
+                      className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-sage focus:border-sage outline-none transition-colors duration-200"
                     ></textarea>
                   </div>
 
                   <button
                     type="submit"
-                    className="px-8 py-3 bg-primary hover:bg-secondary text-white font-semibold rounded-md transition-colors duration-300"
+                    className="px-8 py-3 bg-dark-forest hover:bg-sage text-white font-semibold rounded-md transition-colors duration-300"
                   >
                     Send Message
                   </button>
@@ -223,17 +223,17 @@ export default function Contact() {
               variants={fadeIn}
               className="lg:w-1/3"
             >
-              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+              <h2 className="text-3xl font-bold mb-6 text-dark-forest dark:text-white">
                 Contact Information
               </h2>
               
               <div className="space-y-8">
                 <div className="flex items-start">
-                  <div className="mt-1 mr-4 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <FaMapMarkerAlt className="text-primary text-xl" />
+                  <div className="mt-1 mr-4 w-10 h-10 bg-sage/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <FaMapMarkerAlt className="text-dark-forest text-xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                    <h3 className="text-lg font-semibold text-dark-forest dark:text-white mb-1">
                       Office Location
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300">
@@ -245,11 +245,11 @@ export default function Contact() {
                 </div>
 
                 <div className="flex items-start">
-                  <div className="mt-1 mr-4 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <FaPhone className="text-primary text-xl" />
+                  <div className="mt-1 mr-4 w-10 h-10 bg-sage/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <FaPhone className="text-dark-forest text-xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                    <h3 className="text-lg font-semibold text-dark-forest dark:text-white mb-1">
                       Phone Number
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300">
@@ -260,11 +260,11 @@ export default function Contact() {
                 </div>
 
                 <div className="flex items-start">
-                  <div className="mt-1 mr-4 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <FaEnvelope className="text-primary text-xl" />
+                  <div className="mt-1 mr-4 w-10 h-10 bg-sage/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <FaEnvelope className="text-dark-forest text-xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                    <h3 className="text-lg font-semibold text-dark-forest dark:text-white mb-1">
                       Email Address
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300">
@@ -275,7 +275,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                  <h3 className="text-lg font-semibold text-dark-forest dark:text-white mb-3">
                     Connect With Us
                   </h3>
                   <div className="flex space-x-4">
@@ -290,7 +290,7 @@ export default function Contact() {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-10 h-10 bg-primary/10 hover:bg-primary/20 rounded-full flex items-center justify-center text-primary transition-colors duration-300"
+                        className="w-10 h-10 bg-sage/10 hover:bg-sage/30 rounded-full flex items-center justify-center text-dark-forest transition-colors duration-300"
                       >
                         {social.icon}
                       </a>
@@ -304,8 +304,8 @@ export default function Contact() {
       </section>
 
       {/* Map Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-pale-lime bg-opacity-20 dark:bg-gray-900">
+        <div className="section-container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -313,7 +313,7 @@ export default function Contact() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
+            <h2 className="text-3xl font-bold mb-4 text-dark-forest dark:text-white">
               Our Location
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
@@ -326,7 +326,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="rounded-xl overflow-hidden h-96 border border-gray-200 dark:border-gray-700"
+            className="rounded-xl overflow-hidden h-96 border border-sage dark:border-gray-700"
           >
             {/* This would typically be an actual map, but for this static site it's a placeholder image */}
             <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
