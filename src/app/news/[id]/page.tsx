@@ -150,7 +150,8 @@ const newsItems = [
 ];
 
 export default function NewsArticle() {
-  const { id } = useParams();
+  const params = useParams();
+  const id = params?.id as string;
   const [article, setArticle] = useState<any | null>(null);
   const [relatedArticles, setRelatedArticles] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);

@@ -302,8 +302,21 @@ export default function OurTeam() {
   );
 }
 
+// Define TeamMember interface
+interface TeamMember {
+  name: string;
+  role: string;
+  bio: string;
+  image: string;
+  social: {
+    linkedin: string;
+    twitter: string;
+    email: string;
+  };
+}
+
 // Team Member Card Component
-const TeamMemberCard = ({ member, index }) => {
+const TeamMemberCard = ({ member, index }: { member: TeamMember; index: number }) => {
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
